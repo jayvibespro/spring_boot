@@ -1,0 +1,104 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+
+### General ###
+*.class
+*.log
+*.DS_Store
+*.swp
+*.swo
+.idea/
+target/
+
+### Maven ###
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+.settings/
+dependency-reduced-pom.xml
+release.properties
+
+### Gradle ###
+.gradle/
+
+### Logs ###
+logs/
+log/
+
+### OS-specific ###
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Eclipse
+.metadata/
+
+
+
+### Application Properties ###
+# Exclude sensitive properties files
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+
+### Database ###
+db/
+*.db
+*.sql
+*.mv.db
+*.trace.db
+*.h2.db
+
+### Temp Files ###
+*.tmp
+*.bak
+*.pid
+*.seed
+*.backup
+/tmp/
+
