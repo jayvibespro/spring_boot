@@ -8,6 +8,39 @@ import java.util.List;
 @Entity
 @Table
 public class Course {
+    @Id
+    @SequenceGenerator(
+            name = "course_sequence",
+            sequenceName = "course_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "course_sequence"
+    )
+    private Long id;
+    private  String name;
+    private String code;
+
+    @ManyToMany(mappedBy = "courses")
+     // Prevents infinite recursion
+    private List<Student> students;
+
+
+    public Course() {
+    }
+
+    public Course(String name, String code) {
+        this.name = name;
+        this.code = code;
+    }
+
+    public Course(Long id, String name, String code) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+    }
+
     public Long getId() {
         return id;
     }
@@ -31,31 +64,5 @@ public class Course {
     public void setCode(String code) {
         this.code = code;
     }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    @Id
-    @SequenceGenerator(
-            name = "course_sequence",
-            sequenceName = "course_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "course_sequence"
-    )
-    private Long id;
-    private  String name;
-    private String code;
-
-    @ManyToMany(mappedBy = "courses")
-     // Prevents infinite recursion
-    private List<Student> students;
 
 }

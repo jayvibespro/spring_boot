@@ -1,10 +1,12 @@
 package com.jaycode.demo.features.student;
 
 import com.jaycode.demo.features.course.Course;
+import com.jaycode.demo.features.department.Department;
 import com.jaycode.demo.utils.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,10 +32,9 @@ public class StudentService {
     }
 
 
-    public StudentDTO getStudent(Long studentId) {
-        Student student = studentRepository.findById(studentId)
+    public Student getStudent(Long studentId) {
+        return studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
-        return new StudentDTO(student.getId(), student.getName(), student.getEmail(), student.getDob(), student.getDepartment());
     }
 
 
@@ -41,11 +42,10 @@ public class StudentService {
         Optional<Student> optionalStudent = studentRepository.findStudentByEmail(student.getEmail());
 
         if(optionalStudent.isPresent()){
-            throw  new ResourceNotFoundException("Email taken");
+            throw  new ResourceNotFoundException("Email already taken");
         }
 
-        return student;
-//       return studentRepository.save(student);
+       return studentRepository.save(student);
     }
 
     public boolean deleteStudent(Long studentId) {
@@ -78,9 +78,18 @@ public class StudentService {
 
     public Student enrollToCourse(Long studentId, Course course) {
         Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new IllegalStateException("Student not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
+        if (student.getCourses() == null) {
+            student.setCourses(new ArrayList<>());
+        }
         student.getCourses().add(course);
        return studentRepository.save(student);
     }
 
+    public Student enrollToDepartment(Long studentId, Department department) {
+        Student student = studentRepository.findById(studentId).orElseThrow(()-> new ResourceNotFoundException("Student not found"));
+
+        student.setDepartment(department);
+       return studentRepository.save(student);
+    }
 }

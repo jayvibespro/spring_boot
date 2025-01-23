@@ -1,5 +1,6 @@
 package com.jaycode.demo.features.course;
 
+import com.jaycode.demo.models.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +20,9 @@ public class CourseController {
     }
 
     @GetMapping
-    public List<Course> getAllCourses(){
-        return  courseService.getAllCourses();
+    public ResponseModel<List<Course>> getAllCourses(){
+        List<Course> courses =  courseService.getAllCourses();
+        return new ResponseModel<>(200, true, "Courses fetched successfully", courses);
     }
 
     @PostMapping

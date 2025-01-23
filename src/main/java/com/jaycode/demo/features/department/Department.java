@@ -38,11 +38,6 @@ public class Department {
         this.name = name;
     }
 
-    public Department(Long id, String name, Set<Student> student) {
-        this.id = id;
-        this.name = name;
-        this.students = student;
-    }
 
     public Long getId() {
         return id;
@@ -58,13 +53,5 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
     }
 }

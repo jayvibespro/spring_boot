@@ -1,9 +1,9 @@
 package com.jaycode.demo.features.student;
 
 import com.jaycode.demo.features.course.Course;
+import com.jaycode.demo.features.department.Department;
 import com.jaycode.demo.models.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,21 +31,16 @@ public class StudentController {
     }
 
     @GetMapping("{studentId}")
-    public ResponseModel<StudentDTO> getStudent(@PathVariable Long studentId) {
-        StudentDTO student = studentService.getStudent(studentId);
+    public ResponseModel<Student> getStudent(@PathVariable Long studentId) {
+        Student student = studentService.getStudent(studentId);
         return new ResponseModel<>(200, true, "Student fetched successfully", student);
     }
 
 
     @PostMapping
     public ResponseEntity<?> addStudent(@RequestBody Student student) {
-        try {
             studentService.addStudent(student);
             return ResponseEntity.ok(new ResponseModel<>(200, true, "Student added successfully", student));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel<>(500, false, e.getMessage() + " noma sana", null));
-        }
     }
 
     @DeleteMapping(path = "{studentId}")
@@ -66,10 +61,15 @@ public class StudentController {
         return new ResponseModel<>(201,true,"Student updated successfully", updatedStudent);
     }
 
-    @PostMapping(path = "/{studentId}/enroll")
-    public ResponseModel<Student> enrollToCourse(@PathVariable Long studentId, Course course){
+    @PostMapping(path = "/{studentId}/enrollToCourse")
+    public ResponseModel<Student> enrollToCourse(@PathVariable Long studentId, @RequestBody Course course){
         Student enrolledStudent = studentService.enrollToCourse(studentId, course);
-
         return new ResponseModel<>(201,true,"Student enrolled to course successfully", enrolledStudent);
+    }
+
+    @PostMapping(path = "/{studentId}/enrollToDepartment")
+    public ResponseModel<Student> enrollToDepartment(@PathVariable Long studentId, @RequestBody Department department){
+        Student enrolledStudent = studentService.enrollToDepartment(studentId, department);
+        return new ResponseModel<>(201,true,"Student enrolled to department successfully", enrolledStudent);
     }
 }

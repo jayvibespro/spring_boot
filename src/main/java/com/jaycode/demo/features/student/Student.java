@@ -48,9 +48,6 @@ public class Student {
     private Address address;
 
     @ManyToOne()
-//    @JoinColumn(name="department_id")
-//    @JsonManagedReference
-//    @JsonBackReference
     private Department department;
 
     @ManyToMany
