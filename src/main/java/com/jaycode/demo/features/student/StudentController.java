@@ -26,8 +26,11 @@ public class StudentController {
 
     @GetMapping
     public ResponseModel<List<StudentDTO>> getStudents() {
+        System.out.println("Inside getStudents function");
         List<StudentDTO> students = studentService.getStudents();
-        return new ResponseModel<>(200, true, "Students fetched successfully", students);
+        ResponseModel<List<StudentDTO>> responseModel = new ResponseModel<>(200, true, "Students fetched successfully", students);
+        System.out.println("Response before sending: " + responseModel);
+        return  responseModel;
     }
 
     @GetMapping("{studentId}")

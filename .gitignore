@@ -81,7 +81,6 @@ Desktop.ini
 
 ### Application Properties ###
 # Exclude sensitive properties files
-application.properties
 application.yml
 application-*.properties
 application-*.yml
